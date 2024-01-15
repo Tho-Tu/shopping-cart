@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+/* @layer components {
   .example-class {
     @apply relative flex;
   }
-}
+} */
+
+/* css groups? */
