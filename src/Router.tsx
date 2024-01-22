@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App";
+import Root from "./Root.tsx";
 import Home from "./components/Home";
 import Store from "./components/Store";
 import ErrorPage from "./components/ErrorPage";
@@ -9,20 +9,22 @@ const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <App />,
+      element: <Root />,
       errorElement: <ErrorPage />,
-    },
-    {
-      path: "/home",
-      element: <Home />,
-    },
-    {
-      path: "/store",
-      element: <Store />,
-    },
-    {
-      path: "/shopping-cart",
-      element: <ShoppingCart />,
+      children: [
+        {
+          path: "/home",
+          element: <Home />,
+        },
+        {
+          path: "/store",
+          element: <Store />,
+        },
+        {
+          path: "/shopping-cart",
+          element: <ShoppingCart />,
+        },
+      ],
     },
   ]);
 
