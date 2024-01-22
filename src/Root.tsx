@@ -3,10 +3,11 @@ import Header from "./components/Header";
 
 function Root() {
   return (
-    <div className="font-custom">
+    <div className="flex flex-col gap-4 font-custom">
       <Header />
-      <div className="text-green-900">hello world</div>
-      <Outlet />
+      <div className="px-12">
+        <Outlet />
+      </div>
     </div>
   );
 }
