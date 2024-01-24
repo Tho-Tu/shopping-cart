@@ -1,14 +1,14 @@
 import { Outlet, useLoaderData } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function Root() {
   // const { items } = useLoaderData();
   return (
-    <div className="flex flex-col gap-4 font-custom">
+    <div className="flex flex-col font-custom">
       <Header />
-      <div className="px-12">
-        <Outlet />
-      </div>
+      <Outlet />
+      <Footer />
     </div>
   );
 }

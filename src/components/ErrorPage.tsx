@@ -6,6 +6,7 @@ export default function ErrorPage() {
 
   return (
     <div id="error-page" className="p-12 text-center">
+      <div className="text-2xl py-4">🏖️ OpenBeach</div>
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <Link to="/" className="text-cyan-500">
