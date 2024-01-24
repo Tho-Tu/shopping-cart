@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <div className="flex justify-end gap-2 py-4 px-12 bg-gray-700">
+    <footer className="flex justify-end gap-2 py-4 px-12 bg-gray-700">
       <div className="text-white">
         Photo by{" "}
         <a
@@ -17,7 +17,7 @@ function Footer() {
           Unsplash
         </a>
       </div>
-    </div>
+    </footer>
   );
 }
 

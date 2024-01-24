@@ -3,7 +3,7 @@ import SearchInput from "./SearchInput.tsx";
 
 function Header() {
   return (
-    <div className="flex justify-between gap-2 py-4 px-12 bg-cyan-500">
+    <header className="flex justify-between gap-2 py-4 px-12 bg-cyan-500">
       <Link to="/" className="min-w-max self-center text-white text-2xl">
         🏖️ OpenBeach
       </Link>
@@ -19,7 +19,7 @@ function Header() {
           Shopping Cart
         </Link>
       </nav>
-    </div>
+    </header>
   );
 }
 

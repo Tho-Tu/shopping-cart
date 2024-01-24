@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="bg-[url('/art-gallery.jpg')] bg-cover bg-no-repeat bg-center min-h-screen">
+    <div className="flex-1 bg-[url('/art-gallery.jpg')] bg-cover bg-no-repeat bg-center">
       <div className="flex flex-col gap-6 py-40 px-80 text-white">
-        <h1 className="text-2xl italic text-center text-4xl">
+        <h1 className="text-4xl italic text-center">
           Your one stop NFT marketplace
         </h1>
         <p className="text-center text-xl">
