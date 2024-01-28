@@ -1,21 +1,26 @@
 // database for store shopping cart
 
 type ItemsObject = {
-  [key: string]: number;
+  itemName: string;
+  quantity: number;
 };
 
 export default function shoppingCart() {
-  const itemsObject: ItemsObject = {};
+  const itemsArray: ItemsObject[] = [];
 
-  const getItems = () => itemsObject;
+  const getItems = () => itemsArray;
 
-  const addItems = (item: string, quantity: number) => {
-    if (itemsObject[item] !== undefined) {
-      itemsObject[item] = itemsObject[item] + quantity;
-    } else {
-      itemsObject[item] = quantity;
+  const addItems = (newItem: string, quantity: number) => {
+    let itemExist = false;
+    itemsArray.forEach((item: ItemsObject) => {
+      if (item["itemName"] === newItem) {
+        item["itemName"] = item["itemName"] + quantity;
+        itemExist = true;
+      }
+    });
+    if (!itemExist) {
+      itemsArray.push({ itemName: newItem, quantity: quantity });
     }
   };
-
   return { getItems, addItems };
 }
