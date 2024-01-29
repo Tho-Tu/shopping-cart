@@ -1,8 +1,11 @@
 // database for store shopping cart
 
 type ItemsObject = {
+  itemId: number;
   itemName: string;
   quantity: number;
+  price: number;
+  description: string;
 };
 
 export default function shoppingCart() {
@@ -10,7 +13,13 @@ export default function shoppingCart() {
 
   const getItems = () => itemsArray;
 
-  const addItems = (newItem: string, quantity: number) => {
+  const addItems = (
+    itemId: number,
+    newItem: string,
+    quantity: number,
+    price: number,
+    description: string
+  ) => {
     let itemExist = false;
     itemsArray.forEach((item: ItemsObject) => {
       if (item["itemName"] === newItem) {
@@ -19,8 +28,17 @@ export default function shoppingCart() {
       }
     });
     if (!itemExist) {
-      itemsArray.push({ itemName: newItem, quantity: quantity });
+      itemsArray.push({
+        itemId: itemId,
+        itemName: newItem,
+        quantity: quantity,
+        price: price,
+        description: description,
+      });
     }
   };
-  return { getItems, addItems };
+
+  const removeItems = () => {};
+
+  return { getItems, addItems, removeItems };
 }
