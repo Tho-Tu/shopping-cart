@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 
-type cardProps = { itemName: string };
+type cardProps = {
+  itemId: number;
+  itemName: string;
+  itemQuantity: number;
+};
 
-export default function Card({ itemName }: cardProps) {
+export default function Card({ itemId, itemName }: cardProps) {
   return <div>{itemName}</div>;
 }
