@@ -11,28 +11,34 @@ type Item = {
 function Store() {
   const [data, setData] = useState<Item | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<Error | string | null>(null);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products/1")
-      .then((response) => {
+    async function getData() {
+      try {
+        const response = await fetch("https://fakestoreapi.com/products/1");
         if (!response.ok) {
           throw new Error(
-            `This is an HTTP error: The status is ${response.status}`
+            `This is an HATTP error: The status is ${response.status}`
           );
         }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        return setData(data);
-      })
-      .catch((error) => {
-        setError(error);
-      })
-      .finally(() => {
+        const data = await response.json();
+        setData(data);
+        setError(null);
+      } catch (error) {
+        let message;
+        if (error instanceof Error) {
+          message = error.message;
+        } else {
+          message = String(error);
+        }
+        setError(message);
+        setData(null);
+      } finally {
         setLoading(false);
-      });
+      }
+    }
+    getData();
   }, []);
 
   return (
