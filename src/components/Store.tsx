@@ -8,7 +8,7 @@ type Item = {
   [key: string]: unknown;
 };
 
-function Store() {
+const useCardData = () => {
   const [data, setData] = useState<Item | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | string | null>(null);
@@ -19,7 +19,7 @@ function Store() {
         const response = await fetch("https://fakestoreapi.com/products/1");
         if (!response.ok) {
           throw new Error(
-            `This is an HATTP error: The status is ${response.status}`
+            `This is an HTTP error: The status is ${response.status}`
           );
         }
         const data = await response.json();
@@ -40,6 +40,12 @@ function Store() {
     }
     getData();
   }, []);
+
+  return { data, loading, error };
+};
+
+function Store() {
+  const { data, loading, error } = useCardData();
 
   return (
     <div className="flex-1">
