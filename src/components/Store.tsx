@@ -16,13 +16,16 @@ const useCardData = () => {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await fetch("https://fakestoreapi.com/products/1");
+        const response = await fetch(
+          "https://fakestoreapi.com/products?limit=15"
+        );
         if (!response.ok) {
           throw new Error(
             `This is an HTTP error: The status is ${response.status}`
           );
         }
         const data = await response.json();
+        console.log(data);
         setData(data);
         setError(null);
       } catch (error) {
