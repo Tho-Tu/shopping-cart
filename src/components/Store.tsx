@@ -1,15 +1,17 @@
 import Card from "./Card";
-import shoppingCart from "../assets/data";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Key } from "react";
 
-type Item = {
+type CardItem = {
   id: number;
   title: string;
+  description: string;
+  image: string;
+  price: number;
   [key: string]: unknown;
 };
 
 const useCardData = () => {
-  const [data, setData] = useState<Item | null>(null);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | string | null>(null);
 
@@ -53,25 +55,33 @@ function Store() {
   return (
     <div className="flex-1">
       <div className="flex flex-col gap-6 py-24 px-28">
-        Testing Store
         <h1>Fake Store API</h1>
         {loading && <div>Item loading...</div>}
         {error && (
           <div>{`There is a problem fetching the post data - ${error}`}</div>
         )}
-        <ul>
-          {data && data.title}
-          {/* {data &&
-            data.map(({ id, title }) => (
-              <li key={id}>
-                <h3>{title}</h3>
-              </li>
-            ))} */}
+        <ul className="flex flex-wrap w-12">
+          {data &&
+            (data as CardItem[]).map(
+              (item: {
+                id: Key | null | undefined;
+                title: string;
+                description: string;
+                image: string;
+                price: number;
+              }) => (
+                <li key={item.id} className="bg-gray-100 p-4">
+                  <Card
+                    title={item.title}
+                    description={item.description}
+                    image={item.image}
+                    price={item.price}
+                  />
+                </li>
+              )
+            )}
         </ul>
       </div>
-      {/* {shoppingCart.map((items) => (
-        <Card itemName={items} />
-      ))} */}
     </div>
   );
 }
