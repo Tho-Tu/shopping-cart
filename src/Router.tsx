@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Store from "./components/Store";
 import ErrorPage from "./components/ErrorPage";
 import ShoppingCart from "./components/ShoppingCart";
+import Item from "./components/Item.tsx";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -19,6 +20,7 @@ const Router = () => {
         {
           path: "/store",
           element: <Store />,
+          children: [{ path: "/:itemID", element: <Item /> }],
         },
         {
           path: "/shopping-cart",
