@@ -1,14 +1,6 @@
 import { useParams } from "react-router-dom";
 
-type cardProps = {
-  title: string;
-  description: string;
-  image: string;
-  price: number;
-  [key: string]: unknown;
-};
-
-export default function Item({ title, description, image, price }: cardProps) {
+export default function Item() {
   const { itemId } = useParams();
   return (
     <>
