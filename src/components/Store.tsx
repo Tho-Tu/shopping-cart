@@ -1,5 +1,6 @@
 import Card from "./Card";
 import { useState, useEffect, Key } from "react";
+import { Link } from "react-router-dom";
 
 type CardItem = {
   id: number;
@@ -75,12 +76,14 @@ function Store() {
                   key={item.id}
                   className="border-4 border-solid border-r-indigo-500 border-b-indigo-500 p-4 w-80 flex flex-col gap-4 justify-between rounded-xl"
                 >
-                  <Card
-                    title={item.title}
-                    description={item.description}
-                    image={item.image}
-                    price={item.price}
-                  />
+                  <Link to={`/store/${item.id}`}>
+                    <Card
+                      title={item.title}
+                      description={item.description}
+                      image={item.image}
+                      price={item.price}
+                    />
+                  </Link>
                 </li>
               )
             )}
