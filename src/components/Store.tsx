@@ -74,9 +74,12 @@ function Store() {
               }) => (
                 <li
                   key={item.id}
-                  className="border-4 border-solid border-r-indigo-500 border-b-indigo-500 p-4 w-80 flex flex-col gap-4 justify-between rounded-xl"
+                  className="border-4 border-solid border-r-indigo-500 border-b-indigo-500 p-4 w-80 rounded-xl"
                 >
-                  <Link to={`/store/${item.id}`}>
+                  <Link
+                    to={`/store/${item.id}`}
+                    className="flex flex-col gap-4 justify-between"
+                  >
                     <Card
                       title={item.title}
                       description={item.description}
