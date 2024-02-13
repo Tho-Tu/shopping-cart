@@ -3,12 +3,16 @@ export default function SearchInput() {
     <form>
       <label
         htmlFor="default-search"
-        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+        className="mb-2 text-sm font-medium text-gray-900 sr-only 
+        dark:text-white"
       >
         Search
       </label>
       <div className="relative">
-        <div className="absolute min-w-max inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <div
+          className="absolute min-w-max inset-y-0 start-0 flex items-center 
+        ps-3 pointer-events-none"
+        >
           <svg
             className="w-4 h-4 text-gray-500 dark:text-gray-400"
             aria-hidden="true"
@@ -28,12 +32,14 @@ export default function SearchInput() {
         <input
           type="search"
           id="default-search"
-          className="block w-full py-4 px-10 ps-10 text-sm text-black border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500"
+          className="block w-full py-4 px-10 ps-10 text-sm text-black border 
+          border-gray-300 rounded-lg bg-white focus:ring-blue-500 
+          focus:border-blue-500"
           placeholder="Search"
           maxLength={16}
           required
         ></input>
-        <button type="submit" className="button-blue">
+        <button type="submit" className="button-blue absolute">
           Search
         </button>
       </div>
