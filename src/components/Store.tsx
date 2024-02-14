@@ -56,7 +56,7 @@ function Store() {
 
   return (
     <div className="flex-1 flex flex-col gap-6 py-24 px-28">
-      <h1>Fake Store API</h1>
+      <h1 className="text-center text-5xl">Fake Store API</h1>
       {loading && <div>Items loading...</div>}
       {error && (
         <div>{`There is a problem fetching the post data - ${error}`}</div>
@@ -73,11 +73,12 @@ function Store() {
             }) => (
               <li
                 key={item.id}
-                className="border-4 border-solid border-r-indigo-500 border-b-indigo-500 p-4 w-80 rounded-xl"
+                className="border-4 border-solid border-r-indigo-500 
+                border-b-indigo-500 p-4 w-80 rounded-xl"
               >
                 <Link
                   to={`/store/${item.id}`}
-                  className="flex flex-col gap-4 justify-between"
+                  className="h-full flex flex-col gap-4 justify-between"
                 >
                   <Card
                     title={item.title}
