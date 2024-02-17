@@ -1,15 +1,15 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./Root.tsx";
-import Home from "./components/Home";
-import Store from "./components/Store";
-import ErrorPage from "./components/ErrorPage";
-import ShoppingCart from "./components/ShoppingCart";
-import Item from "./components/Item.tsx";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Root from './Root.tsx';
+import Home from './components/Home';
+import Store from './components/Store';
+import ErrorPage from './components/ErrorPage';
+import ShoppingCart from './components/ShoppingCart';
+import Item from './components/Item.tsx';
 
 const Router = () => {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <Root />,
       errorElement: <ErrorPage />,
       children: [
@@ -18,17 +18,17 @@ const Router = () => {
           element: <Home />,
         },
         {
-          path: "/store",
+          path: '/store',
           element: <Store />,
         },
         {
-          path: "store/:itemIndex",
+          path: 'store/:itemIndex',
           element: <Item />,
         },
-        {
-          path: "/shopping-cart",
-          element: <ShoppingCart />,
-        },
+        // {
+        //   path: "/shopping-cart",
+        //   element: <ShoppingCart />,
+        // },
       ],
     },
   ]);

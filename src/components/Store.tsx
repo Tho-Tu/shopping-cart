@@ -57,7 +57,7 @@ function Store() {
   return (
     <div className="flex flex-1 flex-col gap-6 px-28 py-24">
       <h1 className="text-center text-5xl">Fake Store API</h1>
-      {loading && <div>Items loading...</div>}gi
+      {loading && <div>Items loading...</div>}
       {error && (
         <div>{`There is a problem fetching the post data - ${error}`}</div>
       )}

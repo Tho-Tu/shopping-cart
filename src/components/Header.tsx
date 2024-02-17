@@ -1,9 +1,19 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchInput from './SearchInput.tsx';
+import ShoppingCart from './ShoppingCart.tsx';
 
 function Header() {
+  const [showModal, setShowModal] = useState(false);
+
+  function handleShowModal(isVisible: boolean) {
+    setShowModal(isVisible);
+  }
   return (
-    <header className="z-10 flex justify-between gap-2 bg-cyan-500 px-12 py-4 shadow-[0_2px_16px_8px_rgba(0,0,0,0.3)]">
+    <header
+      className="z-10 flex justify-between gap-2 bg-cyan-500 px-12 
+    py-4 shadow-[0_2px_16px_8px_rgba(0,0,0,0.3)]"
+    >
       <Link to="/" className="min-w-max self-center text-2xl text-white">
         🏖️ OpenBeach
       </Link>
@@ -15,9 +25,16 @@ function Header() {
         <Link to="/store" className="self-center">
           Store
         </Link>
-        <Link to="/shopping-cart" className="min-w-max self-center">
+        <button
+          type="button"
+          className="min-w-max self-center"
+          onClick={() => {
+            setShowModal(!showModal);
+          }}
+        >
           Shopping Cart
-        </Link>
+        </button>
+        <ShoppingCart isVisible={showModal} handleShowModal={handleShowModal} />
       </nav>
     </header>
   );
