@@ -1,6 +1,6 @@
-import Card from "./Card";
-import { useState, useEffect, Key } from "react";
-import { Link } from "react-router-dom";
+import Card from './Card';
+import { useState, useEffect, Key } from 'react';
+import { Link } from 'react-router-dom';
 
 type CardItem = {
   id: number;
@@ -20,8 +20,8 @@ const useCardData = () => {
     async function getData() {
       try {
         const response = await fetch(
-          "https://fakestoreapi.com/products?limit=15",
-          { mode: "cors" }
+          'https://fakestoreapi.com/products?limit=15',
+          { mode: 'cors' }
         );
         if (!response.ok) {
           throw new Error(
@@ -55,9 +55,9 @@ function Store() {
   const { data, loading, error } = useCardData();
 
   return (
-    <div className="flex-1 flex flex-col gap-6 py-24 px-28">
+    <div className="flex flex-1 flex-col gap-6 px-28 py-24">
       <h1 className="text-center text-5xl">Fake Store API</h1>
-      {loading && <div>Items loading...</div>}
+      {loading && <div>Items loading...</div>}gi
       {error && (
         <div>{`There is a problem fetching the post data - ${error}`}</div>
       )}
@@ -73,12 +73,12 @@ function Store() {
             }) => (
               <li
                 key={item.id}
-                className="border-4 border-solid border-r-indigo-500 
-                border-b-indigo-500 p-4 w-80 rounded-xl"
+                className="w-80 rounded-xl border-4 
+                border-solid border-b-indigo-500 border-r-indigo-500 p-4"
               >
                 <Link
                   to={`/store/${item.id}`}
-                  className="h-full flex flex-col gap-4 justify-between"
+                  className="flex h-full flex-col justify-between gap-4"
                 >
                   <Card
                     title={item.title}

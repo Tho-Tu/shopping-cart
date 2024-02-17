@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useParams, Form } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams, Form } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 type itemType = {
   [key: string]: any;
@@ -17,7 +17,7 @@ export default function Item() {
       try {
         const response = await fetch(
           `https://fakestoreapi.com/products/${itemIndex}`,
-          { mode: "cors" }
+          { mode: 'cors' }
         );
         if (!response.ok) {
           throw new Error(
@@ -49,13 +49,13 @@ export default function Item() {
   }
 
   return (
-    <div className="flex-1 flex gap-8 py-24 px-28">
-      <div className="flex flex-col gap-10 w-3/5">
+    <div className="flex flex-1 gap-8 px-28 py-24">
+      <div className="flex w-3/5 flex-col gap-10">
         {loading && <div>Item loading...</div>}
         {error && (
           <div>{`There is a problem fetching the post data - ${error}`}</div>
         )}
-        <h3 className="font-bold text-2xl">{item && item.title}</h3>
+        <h3 className="text-2xl font-bold">{item && item.title}</h3>
         <div className="text-xl">
           {item && capitalizeFirstLetter(item.description)}
         </div>
@@ -66,9 +66,9 @@ export default function Item() {
               <Form method="post" className="flex gap-3">
                 <input
                   type="number"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 
-                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-                block w-full p-2.5"
+                  className="block w-full rounded-lg border border-gray-300 
+                  bg-gray-50 p-2.5 text-sm text-gray-900 
+                  focus:border-blue-500 focus:ring-blue-500"
                   placeholder="0"
                   required
                 ></input>

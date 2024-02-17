@@ -11,14 +11,14 @@ type cardProps = {
 export default function Card({ title, image, price }: cardProps) {
   return (
     <>
-      <h3 className="font-bold text-center">{title}</h3>
+      <h3 className="text-center font-bold">{title}</h3>
       <img
         src={image}
         alt={title}
         draggable="false"
-        className="w-40 rounded-xl self-center"
+        className="w-40 self-center rounded-xl"
       ></img>
-      <div className="font-bold flex justify-between">
+      <div className="flex justify-between font-bold">
         <button type="button" className="button-blue">
           More details
         </button>

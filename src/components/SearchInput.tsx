@@ -3,18 +3,18 @@ export default function SearchInput() {
     <form>
       <label
         htmlFor="default-search"
-        className="mb-2 text-sm font-medium text-gray-900 sr-only 
+        className="sr-only mb-2 text-sm font-medium text-gray-900 
         dark:text-white"
       >
         Search
       </label>
       <div className="relative">
         <div
-          className="absolute min-w-max inset-y-0 start-0 flex items-center 
-        ps-3 pointer-events-none"
+          className="pointer-events-none absolute inset-y-0 start-0 flex min-w-max 
+        items-center ps-3"
         >
           <svg
-            className="w-4 h-4 text-gray-500 dark:text-gray-400"
+            className="h-4 w-4 text-gray-500 dark:text-gray-400"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -32,9 +32,9 @@ export default function SearchInput() {
         <input
           type="search"
           id="default-search"
-          className="block w-full py-4 px-10 ps-10 text-sm text-black border 
-          border-gray-300 rounded-lg bg-white focus:ring-blue-500 
-          focus:border-blue-500"
+          className="block w-full rounded-lg border border-gray-300 bg-white px-10 py-4 
+          ps-10 text-sm text-black focus:border-blue-500 
+          focus:ring-blue-500"
           placeholder="Search"
           maxLength={16}
           required
