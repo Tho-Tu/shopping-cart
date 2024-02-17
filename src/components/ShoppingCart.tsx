@@ -1,33 +1,36 @@
 type shoppingCartProps = {
   isVisible: boolean;
-  handleShowModal: (isVisible: boolean) => void;
+  onClose: () => void;
 };
 
-function ShoppingCart({ isVisible, handleShowModal }: shoppingCartProps) {
+function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
   if (!isVisible) return null;
+
+  const handleClose: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    const target = e.target as HTMLDivElement;
+    if (target.id === 'wrapper') {
+      onClose();
+    }
+  };
+
   return (
     <div
       className="fixed inset-0 flex justify-end bg-black bg-opacity-25 
     backdrop-blur-sm"
+      id="wrapper"
+      onClick={handleClose}
     >
-      <div className="w-[600px]">
-        <div className="rounded bg-white p-2">
+      <div className="w-[450px] text-black">
+        <div className="h-full rounded bg-white p-2">
           <button
-            className="blue-button z-10"
+            className="button-blue z-10"
             onClick={() => {
-              handleShowModal(!isVisible);
+              onClose();
             }}
           >
             X
           </button>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam
-          laborum repellendus ipsam suscipit. Veritatis at consectetur unde
-          doloribus nesciunt esse! Vero mollitia fugit a exercitationem libero
-          asperiores veritatis optio nihil? Lorem ipsum dolor, sit amet
-          consectetur adipisicing elit. Voluptates, quis dolore nesciunt
-          cupiditate consequatur ea ad magni consectetur vel laudantium natus
-          dignissimos nostrum expedita earum, delectus architecto odio, dolores
-          eaque.
+          <h1>Shopping Cart</h1>
         </div>
       </div>
     </div>

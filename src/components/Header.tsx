@@ -6,9 +6,6 @@ import ShoppingCart from './ShoppingCart.tsx';
 function Header() {
   const [showModal, setShowModal] = useState(false);
 
-  function handleShowModal(isVisible: boolean) {
-    setShowModal(isVisible);
-  }
   return (
     <header
       className="z-10 flex justify-between gap-2 bg-cyan-500 px-12 
@@ -34,7 +31,12 @@ function Header() {
         >
           Shopping Cart
         </button>
-        <ShoppingCart isVisible={showModal} handleShowModal={handleShowModal} />
+        <ShoppingCart
+          isVisible={showModal}
+          onClose={() => {
+            setShowModal(false);
+          }}
+        />
       </nav>
     </header>
   );
