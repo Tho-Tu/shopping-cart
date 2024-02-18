@@ -27,6 +27,7 @@ function Header() {
           className="min-w-max self-center"
           onClick={() => {
             setShowModal(!showModal);
+            document.body.style.overflow = showModal ? 'auto' : 'hidden';
           }}
         >
           Shopping Cart
@@ -35,6 +36,7 @@ function Header() {
           isVisible={showModal}
           onClose={() => {
             setShowModal(false);
+            document.body.style.overflow = showModal ? 'auto' : 'hidden';
           }}
         />
       </nav>
