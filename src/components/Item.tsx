@@ -1,6 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useParams, Form } from 'react-router-dom';
+import { useParams, Form, redirect } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+// import shoppingCartData from '../assets/data';
+
+type requestObject = {
+  [key: string]: any;
+};
+export async function itemAction({ request }: requestObject) {
+  const data = await request.formData();
+  const submission = {
+    number: data.get('number'),
+  };
+
+  console.log(submission);
+
+  return redirect('/');
+}
 
 type itemType = {
   [key: string]: any;
@@ -66,10 +81,11 @@ export default function Item() {
               <Form method="post" className="flex gap-3">
                 <input
                   type="number"
+                  name="number"
                   className="block w-full rounded-lg border border-gray-300 
                   bg-gray-50 p-2.5 text-sm text-gray-900 
                   focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="0"
+                  placeholder="1"
                   required
                 ></input>
                 <button type="submit" className="button-blue min-w-fit">

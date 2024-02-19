@@ -1,3 +1,5 @@
+import shoppingCartData, { type ItemsObject } from '../assets/data';
+
 type shoppingCartProps = {
   isVisible: boolean;
   onClose: () => void;
@@ -21,7 +23,10 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
       onClick={handleClose}
     >
       <div className="w-[450px] text-black">
-        <div className="flex h-full flex-col justify-between gap-4 rounded bg-white p-4">
+        <div
+          className="flex h-full flex-col justify-between gap-4 
+        rounded bg-white p-4"
+        >
           <div className="flex justify-between">
             <h1 className="text-2xl font-bold">Shopping Cart</h1>
             <button
@@ -33,7 +38,18 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
               Close
             </button>
           </div>
-          <div className="flex-auto">Shopping contents</div>
+          <div className="flex-auto">
+            {shoppingCartData()
+              .getItems()
+              .map((item: ItemsObject) => (
+                <CartItems
+                  itemIndex={item.itemIndex}
+                  itemName={item.itemName}
+                  quantity={item.quantity}
+                  price={item.price}
+                />
+              ))}
+          </div>
           <button className="button-blue">Checkout</button>
         </div>
       </div>
@@ -42,3 +58,14 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
 }
 
 export default ShoppingCart;
+
+function CartItems({ itemIndex, itemName, quantity, price }: ItemsObject) {
+  return (
+    <>
+      <div>{itemIndex + 1}</div>
+      <div>{itemName}</div>
+      <div>{quantity}</div>
+      <div>{price}</div>
+    </>
+  );
+}

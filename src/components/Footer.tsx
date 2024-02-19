@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer
-      className="z-10 flex justify-end gap-2 bg-gray-700 
+      className="flex justify-end gap-2 bg-gray-700 
     px-12 py-4 shadow-[0_-4px_16px_8px_rgba(0,0,0,0.3)]"
     >
       <div className="text-white">
