@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams, Form, redirect } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-// import shoppingCartData from '../assets/data';
+import shoppingCartData from '../assets/data';
 
 type requestObject = {
   [key: string]: any;
 };
-export async function itemAction({ request }: requestObject) {
+export async function itemAction({ request, params }: requestObject) {
   const data = await request.formData();
   const submission = {
     number: data.get('number'),
@@ -14,7 +14,13 @@ export async function itemAction({ request }: requestObject) {
 
   console.log(submission);
 
-  return redirect('/');
+  shoppingCartData().addItems(
+    params.itemIndex,
+    'test',
+    submission['number'],
+    123
+  );
+  return redirect('/store');
 }
 
 type itemType = {
