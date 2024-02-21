@@ -6,13 +6,15 @@ import shoppingCartData from '../assets/data';
 type requestObject = {
   [key: string]: any;
 };
+// eslint-disable-next-line react-refresh/only-export-components
 export async function itemAction({ request }: requestObject) {
   const data = await request.formData();
   const submission = {
-    itemId: data.get('itemId'),
+    itemId: +data.get('itemId'),
     itemName: data.get('itemName'),
-    quantity: data.get('quantity'),
+    quantity: +data.get('quantity'),
     price: data.get('price'),
+    itemImage: data.get('itemImage'),
   };
 
   console.log(submission);
@@ -21,10 +23,11 @@ export async function itemAction({ request }: requestObject) {
     submission.itemId,
     submission.itemName,
     submission.quantity,
-    submission.price
+    submission.price,
+    submission.itemImage
   );
 
-  console.log('shopping cart: ' + shoppingCartData.getItems());
+  console.log(shoppingCartData.getItems());
 
   return redirect('/store');
 }
@@ -107,8 +110,13 @@ export default function Item() {
                 ></input>
                 <input
                   type="hidden"
-                  name="itemPrice"
+                  name="price"
                   value={item && item.price}
+                ></input>
+                <input
+                  type="hidden"
+                  name="itemImage"
+                  value={item && item.image}
                 ></input>
                 <button type="submit" className="button-blue min-w-fit">
                   Add to cart

@@ -28,7 +28,7 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
         rounded bg-white p-4"
         >
           <div className="flex justify-between">
-            <h1 className="text-2xl font-bold">Shopping Cart</h1>
+            <h1 className="text-2xl font-extrabold">Shopping Cart</h1>
             <button
               className="button-blue w-min bg-red-400"
               onClick={() => {
@@ -38,15 +38,21 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
               Close
             </button>
           </div>
-          <div className="flex-auto">
+          <ul className="flex-auto overflow-auto">
             {shoppingCartData.getItems().map((item: ItemsObject) => (
-              <CartItems
-                itemId={item.itemId}
-                itemName={item.itemName}
-                quantity={item.quantity}
-                price={item.price}
-              />
+              <li key={item.itemId}>
+                <CartItems
+                  itemName={item.itemName}
+                  quantity={item.quantity}
+                  price={item.price}
+                  itemImage={item.itemImage}
+                />
+              </li>
             ))}
+          </ul>
+          <div>
+            Total Price: $
+            {Math.round(shoppingCartData.totalPrice() * 100) / 100}
           </div>
           <button className="button-blue">Checkout</button>
         </div>
@@ -57,13 +63,26 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
 
 export default ShoppingCart;
 
-function CartItems({ itemId, itemName, quantity, price }: ItemsObject) {
+function CartItems({ itemName, quantity, price, itemImage }: ItemsObject) {
   return (
     <>
-      <div>{itemId + 1}</div>
-      <div>{itemName}</div>
-      <div>{quantity}</div>
-      <div>{price}</div>
+      <div className="mb-1 flex min-h-36 gap-8 bg-slate-100 p-1">
+        <div className="flex w-28">
+          <img
+            src={itemImage}
+            alt={itemName && itemName}
+            draggable="false"
+            className="w-24 self-center rounded-xl"
+          ></img>
+        </div>
+        <div className="flex flex-col justify-between">
+          <div className="font-bold">{itemName}</div>
+          <div>${price * quantity}</div>
+          <div>
+            <span className="italic">Quantity:</span> {quantity}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

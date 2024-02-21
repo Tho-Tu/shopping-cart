@@ -1,10 +1,11 @@
 // database for store shopping cart
 
 export type ItemsObject = {
-  itemId: number;
+  itemId?: number;
   itemName: string;
   quantity: number;
   price: number;
+  itemImage: string;
   [key: string]: unknown;
 };
 
@@ -17,13 +18,15 @@ const shoppingCartData = (() => {
     itemId: number,
     itemName: string,
     quantity: number,
-    price: number
+    price: number,
+    itemImage: string
   ) => {
     const newItem = {
       itemId: itemId,
       itemName: itemName,
       quantity: quantity,
       price: price,
+      itemImage: itemImage,
     };
 
     let itemExist = false;
@@ -48,7 +51,17 @@ const shoppingCartData = (() => {
     itemsArray[itemId].quantity += newQuantity;
   };
 
-  return { getItems, addItems, removeItems, adjustQuantity };
+  const totalPrice = () => {
+    let sum = 0;
+
+    itemsArray.forEach((item) => {
+      sum += item.quantity * item.price;
+    });
+
+    return sum;
+  };
+
+  return { getItems, addItems, removeItems, adjustQuantity, totalPrice };
 })();
 
 export default shoppingCartData;
