@@ -39,16 +39,14 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
             </button>
           </div>
           <div className="flex-auto">
-            {shoppingCartData()
-              .getItems()
-              .map((item: ItemsObject) => (
-                <CartItems
-                  itemIndex={item.itemIndex}
-                  itemName={item.itemName}
-                  quantity={item.quantity}
-                  price={item.price}
-                />
-              ))}
+            {shoppingCartData.getItems().map((item: ItemsObject) => (
+              <CartItems
+                itemId={item.itemId}
+                itemName={item.itemName}
+                quantity={item.quantity}
+                price={item.price}
+              />
+            ))}
           </div>
           <button className="button-blue">Checkout</button>
         </div>
@@ -59,10 +57,10 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
 
 export default ShoppingCart;
 
-function CartItems({ itemIndex, itemName, quantity, price }: ItemsObject) {
+function CartItems({ itemId, itemName, quantity, price }: ItemsObject) {
   return (
     <>
-      <div>{itemIndex + 1}</div>
+      <div>{itemId + 1}</div>
       <div>{itemName}</div>
       <div>{quantity}</div>
       <div>{price}</div>

@@ -6,20 +6,26 @@ import shoppingCartData from '../assets/data';
 type requestObject = {
   [key: string]: any;
 };
-export async function itemAction({ request, params }: requestObject) {
+export async function itemAction({ request }: requestObject) {
   const data = await request.formData();
   const submission = {
-    number: data.get('number'),
+    itemId: data.get('itemId'),
+    itemName: data.get('itemName'),
+    quantity: data.get('quantity'),
+    price: data.get('price'),
   };
 
   console.log(submission);
 
-  shoppingCartData().addItems(
-    params.itemIndex,
-    'test',
-    submission['number'],
-    123
+  shoppingCartData.addItems(
+    submission.itemId,
+    submission.itemName,
+    submission.quantity,
+    submission.price
   );
+
+  console.log('shopping cart: ' + shoppingCartData.getItems());
+
   return redirect('/store');
 }
 
@@ -28,7 +34,7 @@ type itemType = {
 };
 
 export default function Item() {
-  const { itemIndex } = useParams();
+  const { itemId } = useParams();
   const [item, setItem] = useState<itemType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | string | null>(null);
@@ -37,7 +43,7 @@ export default function Item() {
     async function getItem() {
       try {
         const response = await fetch(
-          `https://fakestoreapi.com/products/${itemIndex}`,
+          `https://fakestoreapi.com/products/${itemId}`,
           { mode: 'cors' }
         );
         if (!response.ok) {
@@ -46,7 +52,6 @@ export default function Item() {
           );
         }
         const item = await response.json();
-        console.log(item);
         setItem(item);
         setError(null);
       } catch (error) {
@@ -63,7 +68,7 @@ export default function Item() {
       }
     }
     getItem();
-  }, [itemIndex]);
+  }, [itemId]);
 
   function capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -87,12 +92,23 @@ export default function Item() {
               <Form method="post" className="flex gap-3">
                 <input
                   type="number"
-                  name="number"
+                  name="quantity"
                   className="block w-full rounded-lg border border-gray-300 
                   bg-gray-50 p-2.5 text-sm text-gray-900 
                   focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="1"
+                  defaultValue={1}
                   required
+                ></input>
+                <input type="hidden" name="itemId" value={itemId}></input>
+                <input
+                  type="hidden"
+                  name="itemName"
+                  value={item && item.title}
+                ></input>
+                <input
+                  type="hidden"
+                  name="itemPrice"
+                  value={item && item.price}
                 ></input>
                 <button type="submit" className="button-blue min-w-fit">
                   Add to cart

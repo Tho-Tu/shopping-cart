@@ -1,49 +1,54 @@
 // database for store shopping cart
 
 export type ItemsObject = {
-  itemIndex: number;
+  itemId: number;
   itemName: string;
   quantity: number;
   price: number;
   [key: string]: unknown;
 };
 
-export default function shoppingCartData() {
+const shoppingCartData = (() => {
   const itemsArray: ItemsObject[] = [];
 
-  const getItems = () => itemsArray;
+  const getItems = () => [...itemsArray];
 
   const addItems = (
-    itemIndex: number,
-    newItem: string,
+    itemId: number,
+    itemName: string,
     quantity: number,
     price: number
   ) => {
+    const newItem = {
+      itemId: itemId,
+      itemName: itemName,
+      quantity: quantity,
+      price: price,
+    };
+
     let itemExist = false;
+
     itemsArray.forEach((item: ItemsObject) => {
-      if (item['itemName'] == newItem) {
-        item['quantity'] + quantity;
+      if (item['itemId'] === itemId) {
+        item['quantity'] += quantity;
         itemExist = true;
+        return;
       }
     });
     if (!itemExist) {
-      itemsArray.push({
-        itemIndex: itemIndex,
-        itemName: newItem,
-        quantity: quantity,
-        price: price,
-      });
+      itemsArray.push(newItem);
     }
   };
 
-  // relies on UI
-  const removeItems = (itemIndex: number) => {
-    itemsArray.splice(itemIndex, 1);
+  const removeItems = (itemId: number) => {
+    itemsArray.splice(itemId, 1);
   };
 
-  const adjustQuantity = (itemIndex: number, newQuantity: number) => {
-    itemsArray[itemIndex].quantity += newQuantity;
+  const adjustQuantity = (itemId: number, newQuantity: number) => {
+    itemsArray[itemId].quantity += newQuantity;
   };
 
   return { getItems, addItems, removeItems, adjustQuantity };
-}
+})();
+
+export default shoppingCartData;

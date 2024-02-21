@@ -22,7 +22,7 @@ const Router = () => {
           element: <Store />,
         },
         {
-          path: 'store/:itemIndex',
+          path: 'store/:itemId',
           element: <Item />,
           action: itemAction,
         },

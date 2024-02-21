@@ -29,7 +29,6 @@ const useCardData = () => {
           );
         }
         const data = await response.json();
-        console.log(data);
         setData(data);
         setError(null);
       } catch (error) {
