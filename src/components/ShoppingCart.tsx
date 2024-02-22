@@ -1,4 +1,6 @@
 import shoppingCartData, { type ItemsObject } from '../assets/data';
+import DeleteIcon from './icons/DeleteIcon';
+import { useState } from 'react';
 
 type shoppingCartProps = {
   isVisible: boolean;
@@ -6,7 +8,11 @@ type shoppingCartProps = {
 };
 
 function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
-  if (!isVisible) return null;
+  const [cartUpdated, setCartUpdated] = useState(false);
+
+  const handleCartUpdate = () => {
+    setCartUpdated(!cartUpdated);
+  };
 
   const handleClose: React.MouseEventHandler<HTMLDivElement> = (e) => {
     const target = e.target as HTMLDivElement;
@@ -14,7 +20,7 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
       onClose();
     }
   };
-
+  if (!isVisible) return null;
   return (
     <div
       className="fixed inset-0 flex h-screen justify-end bg-black bg-opacity-25 
@@ -41,12 +47,7 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
           <ul className="flex-auto overflow-auto">
             {shoppingCartData.getItems().map((item: ItemsObject) => (
               <li key={item.itemId}>
-                <CartItems
-                  itemName={item.itemName}
-                  quantity={item.quantity}
-                  price={item.price}
-                  itemImage={item.itemImage}
-                />
+                <CartItems item={item} handleCartUpdate={handleCartUpdate} />
               </li>
             ))}
           </ul>
@@ -63,7 +64,14 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
 
 export default ShoppingCart;
 
-function CartItems({ itemName, quantity, price, itemImage }: ItemsObject) {
+type CartItemsProps = {
+  item: ItemsObject;
+  handleCartUpdate: () => void;
+};
+
+function CartItems({ item, handleCartUpdate }: CartItemsProps) {
+  const { itemId, itemName, quantity, price, itemImage } = item;
+
   return (
     <>
       <div className="mb-1 flex min-h-36 gap-8 bg-slate-100 p-1">
@@ -75,8 +83,20 @@ function CartItems({ itemName, quantity, price, itemImage }: ItemsObject) {
             className="w-24 self-center rounded-xl"
           ></img>
         </div>
-        <div className="flex flex-col justify-between">
-          <div className="font-bold">{itemName}</div>
+        <div className="flex flex-1 flex-col justify-between">
+          <div className="flex justify-between">
+            <div className="self-center font-bold">{itemName}</div>
+            <button
+              type="submit"
+              className="self-center"
+              onClick={() => {
+                shoppingCartData.removeItems(itemId);
+                handleCartUpdate();
+              }}
+            >
+              <DeleteIcon color={'red'} />
+            </button>
+          </div>
           <div>${price * quantity}</div>
           <div>
             <span className="italic">Quantity:</span> {quantity}

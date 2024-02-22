@@ -1,7 +1,7 @@
 // database for store shopping cart
 
 export type ItemsObject = {
-  itemId?: number;
+  itemId: number;
   itemName: string;
   quantity: number;
   price: number;
@@ -44,7 +44,10 @@ const shoppingCartData = (() => {
   };
 
   const removeItems = (itemId: number) => {
-    itemsArray.splice(itemId, 1);
+    const index = itemsArray.findIndex((item) => item.itemId === itemId);
+    if (index !== -1) {
+      itemsArray.splice(index, 1);
+    }
   };
 
   const adjustQuantity = (itemId: number, newQuantity: number) => {
