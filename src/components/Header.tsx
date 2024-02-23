@@ -16,15 +16,21 @@ function Header() {
       </Link>
       <nav className="flex gap-6 text-lg text-white">
         <SearchInput />
-        <Link to="/sef" className="self-center">
+        <Link
+          to="/sef"
+          className="self-center underline-offset-2 hover:underline"
+        >
           Error
         </Link>
-        <Link to="/store" className="self-center">
+        <Link
+          to="/store"
+          className="self-center underline-offset-2 hover:underline"
+        >
           Store
         </Link>
         <button
           type="button"
-          className="min-w-max self-center"
+          className="min-w-max self-center underline-offset-2 hover:underline"
           onClick={() => {
             setShowModal(!showModal);
             document.body.style.overflow = showModal ? 'auto' : 'hidden';

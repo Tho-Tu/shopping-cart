@@ -51,7 +51,11 @@ const shoppingCartData = (() => {
   };
 
   const adjustQuantity = (itemId: number, newQuantity: number) => {
-    itemsArray[itemId].quantity += newQuantity;
+    const index = itemsArray.findIndex((item) => item.itemId === itemId);
+    if (index !== -1 && itemsArray[index].quantity > 0) {
+      itemsArray[index].quantity += newQuantity;
+    }
+    if (itemsArray[index].quantity === 0) removeItems(itemId);
   };
 
   const totalPrice = () => {

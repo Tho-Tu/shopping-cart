@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import shoppingCartData, { type ItemsObject } from '../assets/data';
 import DeleteIcon from './icons/DeleteIcon';
-import { useState } from 'react';
+import AddIcon from './icons/AddIcon';
+import RemoveIcon from './icons/RemoveIcon';
 
 type shoppingCartProps = {
   isVisible: boolean;
@@ -36,7 +38,7 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
           <div className="flex justify-between">
             <h1 className="text-2xl font-extrabold">Shopping Cart</h1>
             <button
-              className="button-blue w-min bg-red-400"
+              className="button-blue w-min bg-red-400 hover:bg-red-500"
               onClick={() => {
                 onClose();
               }}
@@ -98,8 +100,30 @@ function CartItems({ item, handleCartUpdate }: CartItemsProps) {
             </button>
           </div>
           <div>${price * quantity}</div>
-          <div>
-            <span className="italic">Quantity:</span> {quantity}
+          <div className="flex gap-4">
+            <span className="italic">Quantity: {quantity}</span>
+            <div>
+              <button
+                className="mr-2 rounded-2xl bg-slate-300 p-[2px] 
+              hover:bg-slate-400 active:ring-2 active:ring-black"
+                onClick={() => {
+                  shoppingCartData.adjustQuantity(itemId, 1);
+                  handleCartUpdate();
+                }}
+              >
+                <AddIcon color={'green'} />
+              </button>
+              <button
+                className="rounded-2xl bg-slate-300 p-[2px] 
+              hover:bg-slate-400 active:ring-2 active:ring-black"
+                onClick={() => {
+                  shoppingCartData.adjustQuantity(itemId, -1);
+                  handleCartUpdate();
+                }}
+              >
+                <RemoveIcon color={'red'} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
