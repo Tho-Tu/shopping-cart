@@ -17,8 +17,6 @@ export async function itemAction({ request }: requestObject) {
     itemImage: data.get('itemImage'),
   };
 
-  console.log(submission);
-
   shoppingCartData.addItems(
     submission.itemId,
     submission.itemName,
@@ -26,8 +24,6 @@ export async function itemAction({ request }: requestObject) {
     submission.price,
     submission.itemImage
   );
-
-  console.log(shoppingCartData.getItems());
 
   return redirect('/store');
 }

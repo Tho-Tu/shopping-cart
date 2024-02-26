@@ -1,8 +1,9 @@
-import { useState } from 'react';
 import shoppingCartData, { type ItemsObject } from '../assets/data';
 import DeleteIcon from './icons/DeleteIcon';
 import AddIcon from './icons/AddIcon';
 import RemoveIcon from './icons/RemoveIcon';
+import { useContext } from 'react';
+import { CartContext } from '../Root';
 
 type shoppingCartProps = {
   isVisible: boolean;
@@ -10,12 +11,6 @@ type shoppingCartProps = {
 };
 
 function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
-  const [cartUpdated, setCartUpdated] = useState(false);
-
-  const handleCartUpdate = () => {
-    setCartUpdated(!cartUpdated);
-  };
-
   const handleClose: React.MouseEventHandler<HTMLDivElement> = (e) => {
     const target = e.target as HTMLDivElement;
     if (target.id === 'wrapper') {
@@ -36,7 +31,9 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
         rounded bg-white p-4"
         >
           <div className="flex justify-between">
-            <h1 className="text-2xl font-extrabold">Shopping Cart</h1>
+            <h1 className="text-2xl font-extrabold">
+              Shopping Cart ({shoppingCartData.totalItems()})
+            </h1>
             <button
               className="button-blue w-min bg-red-400 hover:bg-red-500"
               onClick={() => {
@@ -49,7 +46,13 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
           <ul className="flex-auto overflow-auto">
             {shoppingCartData.getItems().map((item: ItemsObject) => (
               <li key={item.itemId}>
-                <CartItems item={item} handleCartUpdate={handleCartUpdate} />
+                <CartItems
+                  itemId={item.itemId}
+                  itemName={item.itemName}
+                  quantity={item.quantity}
+                  price={item.price}
+                  itemImage={item.itemImage}
+                />
               </li>
             ))}
           </ul>
@@ -66,13 +69,14 @@ function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
 
 export default ShoppingCart;
 
-type CartItemsProps = {
-  item: ItemsObject;
-  handleCartUpdate: () => void;
-};
-
-function CartItems({ item, handleCartUpdate }: CartItemsProps) {
-  const { itemId, itemName, quantity, price, itemImage } = item;
+function CartItems({
+  itemId,
+  itemName,
+  quantity,
+  price,
+  itemImage,
+}: ItemsObject) {
+  const { handleCartUpdate } = useContext(CartContext);
 
   return (
     <>

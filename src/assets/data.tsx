@@ -68,7 +68,16 @@ const shoppingCartData = (() => {
     return sum;
   };
 
-  return { getItems, addItems, removeItems, adjustQuantity, totalPrice };
+  const totalItems = () => itemsArray.length;
+
+  return {
+    getItems,
+    addItems,
+    removeItems,
+    adjustQuantity,
+    totalPrice,
+    totalItems,
+  };
 })();
 
 export default shoppingCartData;

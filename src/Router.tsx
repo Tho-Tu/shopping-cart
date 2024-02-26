@@ -5,6 +5,7 @@ import Store from './components/Store';
 import ErrorPage from './components/ErrorPage';
 // import ShoppingCart from './components/ShoppingCart';
 import Item, { itemAction } from './components/Item.tsx';
+import { loader as headerLoader } from './components/Header.tsx';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -12,6 +13,7 @@ const Router = () => {
       path: '/',
       element: <Root />,
       errorElement: <ErrorPage />,
+      loader: headerLoader,
       children: [
         {
           index: true,
