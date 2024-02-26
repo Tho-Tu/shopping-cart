@@ -1,9 +1,10 @@
-import shoppingCartData, { type ItemsObject } from '../assets/data';
+import { type ItemsObject, type shoppingCartDataObject } from '../assets/data';
 import DeleteIcon from './icons/DeleteIcon';
 import AddIcon from './icons/AddIcon';
 import RemoveIcon from './icons/RemoveIcon';
 import { useContext } from 'react';
 import { CartContext } from '../Root';
+import { useLoaderData } from 'react-router-dom';
 
 type shoppingCartProps = {
   isVisible: boolean;
@@ -11,6 +12,10 @@ type shoppingCartProps = {
 };
 
 function ShoppingCart({ isVisible, onClose }: shoppingCartProps) {
+  const { shoppingCartData } = useLoaderData() as {
+    shoppingCartData: shoppingCartDataObject;
+  };
+
   const handleClose: React.MouseEventHandler<HTMLDivElement> = (e) => {
     const target = e.target as HTMLDivElement;
     if (target.id === 'wrapper') {
@@ -77,6 +82,9 @@ function CartItems({
   itemImage,
 }: ItemsObject) {
   const { handleCartUpdate } = useContext(CartContext);
+  const { shoppingCartData } = useLoaderData() as {
+    shoppingCartData: shoppingCartDataObject;
+  };
 
   return (
     <>

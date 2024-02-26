@@ -2,17 +2,13 @@ import { useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import SearchInput from './SearchInput.tsx';
 import ShoppingCart from './ShoppingCart.tsx';
-import shoppingCartData from '../assets/data.tsx';
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function loader() {
-  const totalItems = shoppingCartData.totalItems();
-  return { totalItems };
-}
+import { type shoppingCartDataObject } from '../assets/data';
 
 function Header() {
   const [showModal, setShowModal] = useState(false);
-  const { totalItems } = useLoaderData() as { totalItems: number };
+  const { shoppingCartData } = useLoaderData() as {
+    shoppingCartData: shoppingCartDataObject;
+  };
 
   return (
     <header
@@ -44,7 +40,7 @@ function Header() {
             document.body.style.overflow = showModal ? 'auto' : 'hidden';
           }}
         >
-          Shopping Cart ({totalItems})
+          Shopping Cart ({shoppingCartData.totalItems()})
         </button>
         <ShoppingCart
           isVisible={showModal}

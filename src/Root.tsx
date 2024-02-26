@@ -2,6 +2,12 @@ import { Outlet } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { createContext, useState } from 'react';
+import shoppingCartData from './assets/data';
+
+// eslint-disable-next-line react-refresh/only-export-components
+export function loader() {
+  return { shoppingCartData };
+}
 
 export const CartContext = createContext({
   cartUpdated: false,

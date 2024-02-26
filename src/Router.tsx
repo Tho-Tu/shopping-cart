@@ -5,7 +5,7 @@ import Store from './components/Store';
 import ErrorPage from './components/ErrorPage';
 // import ShoppingCart from './components/ShoppingCart';
 import Item, { itemAction } from './components/Item.tsx';
-import { loader as headerLoader } from './components/Header.tsx';
+import { loader as headerLoader } from './Root.tsx';
 
 const Router = () => {
   const router = createBrowserRouter([

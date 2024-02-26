@@ -9,6 +9,21 @@ export type ItemsObject = {
   [key: string]: unknown;
 };
 
+export type shoppingCartDataObject = {
+  getItems: () => ItemsObject[];
+  addItems: (
+    itemId: number,
+    itemName: string,
+    quantity: number,
+    price: number,
+    itemImage: string
+  ) => unknown;
+  removeItems: (itemId: number) => unknown;
+  adjustQuantity: (itemId: number, arg0: number) => unknown;
+  totalPrice: () => number;
+  totalItems: () => number;
+};
+
 const shoppingCartData = (() => {
   const itemsArray: ItemsObject[] = [];
 
